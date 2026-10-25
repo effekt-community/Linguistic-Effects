@@ -31,7 +31,7 @@
         # version = "0.82.0";
 
         ## Select the backends that your project works on (CI builds and tests each one):
-        backends = bs: [ bs.js bs.llvm ];
+        backends = bs: [ bs.js bs.llvm bs.chez-cps bs.chez-callcc bs.chez-monadic ];
       };
 
       perSystem = system:
@@ -51,13 +51,12 @@
             effekt = effektBuild;
             inherit (effektConfig) backends;
           };
-        in {
-          ## The package, plus one for each backend (such as 'effekt-template-llvm')
-          packages = effekt-lib.flakePackages package // {
-            default = package;
 
-            ## For a website ('bs.js-web' backend), uncomment for a preview with 'nix run .#serve':
-            # serve = effekt-lib.serveSite { site = package; };
+          variants = effekt-lib.variantsOf package;
+        in {
+          ## The package, plus one for each backend (such as 'llvm')
+          packages = variants // {
+            default = package;
           };
 
           devShell = effekt-lib.mkDevShell {

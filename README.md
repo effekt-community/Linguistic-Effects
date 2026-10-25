@@ -1,7 +1,7 @@
-# Effekt Template
+# LISEL
 
 > [!WARNING]
-> This is a work-in-progress, feel free to contribute!
+> The README is as-is from <https://github.com/Patrick-Woelfle/Linguistic-Effects>
 
 This template provides a starting point for Effekt projects.
 
